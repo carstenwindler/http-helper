@@ -3,7 +3,7 @@
 use Psr\Http\Message\RequestInterface;
 use Zend\Diactoros\Request\Serializer as RequestSerializer;
 
-function requestToString($request)
+function requestToString(RequestInterface $request)
 {
     return RequestSerializer::toString($request);
 }
@@ -25,7 +25,7 @@ function requestToCurl(RequestInterface $request)
     return $curl;
 }
 
-function requestToFile($request, $path = null)
+function requestToFile(RequestInterface $request, $path = null)
 {
     $httpRequest = RequestSerializer::toString($request);
 

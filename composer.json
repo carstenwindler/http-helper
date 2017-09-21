@@ -1,0 +1,26 @@
+{
+    "name": "carstenwindler/http-helper",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/carstenwindler/http-helper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carsten Windler",
+            "email": "carsten@carstenwindler.de"
+        }
+    ],
+    "require": {
+        "zendframework/zend-diactoros": "^1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3",
+        "mockery/mockery": "0.9.*",
+        "mikey179/vfsStream": "^1.6.4"
+    },
+    "autoload": {
+        "files": [
+            "src/HttpHelper.php"
+        ]
+    }
+}

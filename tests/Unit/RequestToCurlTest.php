@@ -9,7 +9,7 @@ class RequestToCurlTest extends TestCase
     /**
      * @test
      */
-    public function toCurlRequest()
+    public function to_curl()
     {
         $request = new Request(
             'http://www.carstenwindler.de',
@@ -18,14 +18,14 @@ class RequestToCurlTest extends TestCase
 
         $this->assertEquals(
             "curl -X GET http://www.carstenwindler.de -H 'Host: www.carstenwindler.de'",
-            requestToCurl($request)
+            request_to_curl($request)
         );
     }
 
     /**
      * @test
      */
-    public function toCurlRequestWithBody()
+    public function to_curl_with_body()
     {
         $body = new Stream('php://memory', 'w');
         $body->write('body');
@@ -38,14 +38,14 @@ class RequestToCurlTest extends TestCase
 
         $this->assertEquals(
             "curl -X POST http://www.carstenwindler.de -H 'Host: www.carstenwindler.de' -d 'body'",
-            requestToCurl($request)
+            request_to_curl($request)
         );
     }
 
     /**
      * @test
      */
-    public function toCurlRequestWithHeader()
+    public function to_curl_with_header()
     {
         $body = new Stream('php://memory', 'w');
 
@@ -58,7 +58,7 @@ class RequestToCurlTest extends TestCase
 
         $this->assertEquals(
             "curl -X POST http://www.carstenwindler.de -H 'Content-Type: text/xml' -H 'Host: www.carstenwindler.de'",
-            requestToCurl($request)
+            request_to_curl($request)
         );
     }
 }

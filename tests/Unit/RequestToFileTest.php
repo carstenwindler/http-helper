@@ -24,7 +24,7 @@ class RequestToFileTest extends TestCase
     /**
      * @test
      */
-    public function toFileWithDefaultName()
+    public function to_file_with_default_name()
     {
         $request = new Request(
             'http://www.carstenwindler.de',
@@ -33,7 +33,7 @@ class RequestToFileTest extends TestCase
 
         $_SERVER['DOCUMENT_ROOT'] = vfsStream::url('root/webroot');
 
-        $filename = requestToFile($request);
+        $filename = request_to_file($request);
 
         $this->assertTrue(file_exists(vfsStream::url('root/webroot/request.http')));
         $this->assertEquals(vfsStream::url('root/webroot/request.http'), $filename);
@@ -47,14 +47,14 @@ class RequestToFileTest extends TestCase
     /**
      * @test
      */
-    public function toFileWithGivenName()
+    public function to_file_with_given_name()
     {
         $request = new Request(
             'http://www.carstenwindler.de',
             'POST'
         );
 
-        $filename = requestToFile($request, vfsStream::url('root'));
+        $filename = request_to_file($request, vfsStream::url('root'));
 
         $this->assertTrue(file_exists(vfsStream::url('root/request.http')));
         $this->assertEquals(vfsStream::url('root/request.http'), $filename);

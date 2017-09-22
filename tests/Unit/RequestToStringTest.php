@@ -8,7 +8,7 @@ class RequestToStringTest extends TestCase
     /**
      * @test
      */
-    public function toString()
+    public function to_string()
     {
         $request = new Request(
             'http://www.carstenwindler.de',
@@ -19,7 +19,7 @@ class RequestToStringTest extends TestCase
         // basic http request is returned
         $this->assertEquals(
             "POST / HTTP/1.1\r\nHost: www.carstenwindler.de",
-            requestToString($request)
+            request_to_string($request)
         );
     }
 }

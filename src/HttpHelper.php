@@ -1,17 +1,16 @@
 <?php
 
-use Psr\Http\Message\RequestInterface;
 use Zend\Diactoros\Request\Serializer as RequestSerializer;
 
 if (!function_exists('request_to_string')) {
-    function request_to_string(RequestInterface $request)
+    function request_to_string($request)
     {
         return RequestSerializer::toString($request);
     }
 }
 
 if (!function_exists('request_to_curl')) {
-    function request_to_curl(RequestInterface $request)
+    function request_to_curl($request)
     {
         $curl = sprintf('curl -X %s %s', $request->getMethod(), $request->getUri());
 
@@ -30,7 +29,7 @@ if (!function_exists('request_to_curl')) {
 }
 
 if (!function_exists('request_to_file')) {
-    function request_to_file(RequestInterface $request, $path = null)
+    function request_to_file($request, $path = null)
     {
         $httpRequest = request_to_string($request);
 

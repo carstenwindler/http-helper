@@ -36,4 +36,3 @@ The serialization of the PSR-7 request is done using [Zend Diactoros](https://gi
 
 * setup TravisCI
 * make storage path of _request_to_file()_ configurable
-* support symfony/http-foundation

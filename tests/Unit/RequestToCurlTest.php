@@ -1,5 +1,7 @@
 <?php
 
+namespace Carstenwindler\HttpHelper\Tests\Unit;
+
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Stream;
 use PHPUnit\Framework\TestCase;

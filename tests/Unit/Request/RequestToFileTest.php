@@ -1,6 +1,6 @@
 <?php
 
-namespace Carstenwindler\HttpHelper\Tests\Unit;
+namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
 use Zend\Diactoros\Request;
 
@@ -8,27 +8,35 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 
+function time() {
+    return RequestToFileTest::$now ?: \time();
+}
+
 class RequestToFileTest extends TestCase
 {
-    /**
-     * @var int $now Timestamp that will be returned by time()
-     */
-    public static $now;
-
     /**
      * @var vfsStreamDirectory
      */
     private $vfsRoot;
 
+    public static $now;
+
     public function setUp()
     {
         parent::setUp();
 
-        // Tackle the time during the tests
         self::$now = time();
 
         $this->vfsRoot = vfsStream::setup('root');
         vfsStream::create([ 'webroot' => [] ], $this->vfsRoot);
+    }
+
+    /**
+     * Reset custom time after test
+     */
+    protected function tearDown()
+    {
+        self::$now = null;
     }
 
     /**
@@ -45,19 +53,16 @@ class RequestToFileTest extends TestCase
 
         $filename = request_to_file($request);
 
-        $this->assertTrue(file_exists(vfsStream::url('root/webroot/request.http')));
-        $this->assertEquals(vfsStream::url('root/webroot/request.http'), $filename);
+        TestCase::assertTrue(file_exists(vfsStream::url('root/webroot/request.http')));
+        TestCase::assertEquals(vfsStream::url('root/webroot/request.http'), $filename);
 
-        $this->assertEquals(
-            "POST / HTTP/1.1\r\nHost: www.carstenwindler.de",
-            file_get_contents($filename)
-        );
+        TestCase::assertContains('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
     /**
      * @test
      */
-    public function to_file_with_given_name()
+    public function to_file_with_given_path()
     {
         $request = new Request(
             'http://www.carstenwindler.de',
@@ -66,13 +71,10 @@ class RequestToFileTest extends TestCase
 
         $filename = request_to_file($request, vfsStream::url('root'));
 
-        $this->assertTrue(file_exists(vfsStream::url('root/request.http')));
-        $this->assertEquals(vfsStream::url('root/request.http'), $filename);
+        TestCase::assertTrue(file_exists(vfsStream::url('root/request.http')));
+        TestCase::assertEquals(vfsStream::url('root/request.http'), $filename);
 
-        $this->assertEquals(
-            "POST / HTTP/1.1\r\nHost: www.carstenwindler.de",
-            file_get_contents($filename)
-        );
+        TestCase::assertContains('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
     /**
@@ -92,14 +94,11 @@ class RequestToFileTest extends TestCase
 
         $filename = request_to_file($request, vfsStream::url('root'));
 
-        $expectedFile .= "\n\n### " . date(DATE_RFC822) . "\n\n" . $httpRequest;
+        $expectedFile .= "\n\n### " . date(DATE_RFC822, time()) . "\n\n" . $httpRequest;
 
-        $this->assertTrue(file_exists(vfsStream::url('root/request.http')));
-        $this->assertEquals(vfsStream::url('root/request.http'), $filename);
+        TestCase::assertTrue(file_exists(vfsStream::url('root/request.http')));
+        TestCase::assertEquals(vfsStream::url('root/request.http'), $filename);
 
-        $this->assertEquals(
-            $expectedFile,
-            file_get_contents($filename)
-        );
+        TestCase::assertEquals($expectedFile, file_get_contents($filename));
     }
 }

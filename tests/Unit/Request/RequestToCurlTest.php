@@ -1,6 +1,6 @@
 <?php
 
-namespace Carstenwindler\HttpHelper\Tests\Unit;
+namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Stream;
@@ -18,7 +18,7 @@ class RequestToCurlTest extends TestCase
             'GET'
         );
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             "curl -X GET http://www.carstenwindler.de -H 'Host: www.carstenwindler.de'",
             request_to_curl($request)
         );
@@ -38,7 +38,7 @@ class RequestToCurlTest extends TestCase
             $body
         );
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             "curl -X POST http://www.carstenwindler.de -H 'Host: www.carstenwindler.de' -d 'body'",
             request_to_curl($request)
         );
@@ -58,7 +58,7 @@ class RequestToCurlTest extends TestCase
             ['Content-Type' => 'text/xml']
         );
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             "curl -X POST http://www.carstenwindler.de -H 'Content-Type: text/xml' -H 'Host: www.carstenwindler.de'",
             request_to_curl($request)
         );

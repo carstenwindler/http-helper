@@ -1,6 +1,6 @@
 <?php
 
-namespace Carstenwindler\HttpHelper\Tests\Unit;
+namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
 use Zend\Diactoros\Request as Psr7Request;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
@@ -20,7 +20,7 @@ class RequestToStringTest extends TestCase
 
         // not testing Diactoros in detail here obviously, just a quick check a
         // basic http request is returned
-        $this->assertEquals(
+        TestCase::assertEquals(
             "POST / HTTP/1.1\r\nHost: www.carstenwindler.de",
             request_to_string($request)
         );
@@ -46,7 +46,7 @@ class RequestToStringTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             "POST / HTTP/1.1\r\n" .
             "Content-Type:    application/x-www-form-urlencoded\r\n" .
             "Host:            www.carstenwindler.de\r\n\r\n",
@@ -63,7 +63,7 @@ class RequestToStringTest extends TestCase
         $request = new \stdClass;
         $request->host = 'http://www.carstenwindler.de';
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             "unknown\r\n",
             request_to_string($request)
         );

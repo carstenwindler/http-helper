@@ -75,6 +75,10 @@ if (!function_exists('request_to_file')) {
             $path = $_SERVER['DOCUMENT_ROOT'];
         }
 
+        if (empty($path)) {
+            $path = getenv('PWD');
+        }
+
         $filename = $path . '/request.http';
 
         $flags = 0;
@@ -137,6 +141,10 @@ if (!function_exists('response_to_file')) {
 
         if (empty($path)) {
             $path = $_SERVER['DOCUMENT_ROOT'];
+        }
+
+        if (empty($path)) {
+            $path = getenv('PWD');
         }
 
         $filename = $path . '/response.http';

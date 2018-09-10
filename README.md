@@ -1,4 +1,4 @@
-# Http Helper
+# Http Helper [![Build Status](https://travis-ci.org/carstenwindler/http-helper.svg?branch=master)](https://travis-ci.org/carstenwindler/http-helper)
 
 A collection of helper functions for your everyday work with http requests and responses.
 

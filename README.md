@@ -74,5 +74,4 @@ For Symfony, the build-in serializers are used. Nice.
 
 # Todo
 
-* setup TravisCI
 * make storage path of `*_to_file()` configurable

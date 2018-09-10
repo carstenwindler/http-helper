@@ -48,8 +48,12 @@ class RequestToStringTest extends TestCase
 
         TestCase::assertEquals(
             "POST / HTTP/1.1\r\n" .
+            "Accept:          \r\n" .
+            "Accept-Charset:  \r\n" .
+            "Accept-Language: \r\n" .
             "Content-Type:    application/x-www-form-urlencoded\r\n" .
-            "Host:            www.carstenwindler.de\r\n\r\n",
+            "Host:            www.carstenwindler.de\r\n" .
+            "User-Agent:      \r\n\r\n",
             request_to_string($request)
         );
     }

@@ -14,15 +14,13 @@ if (!function_exists('request_to_string')) {
     {
         $requestString = "unknown\r\n";
 
-        if (
-            class_exists('Symfony\Component\HttpFoundation\Request') &&
+        if (class_exists('Symfony\Component\HttpFoundation\Request') &&
             $request instanceof Symfony\Component\HttpFoundation\Request
         ) {
             $requestString = $request->__toString();
         }
 
-        if (
-            interface_exists('Psr\Http\Message\RequestInterface') &&
+        if (interface_exists('Psr\Http\Message\RequestInterface') &&
             $request instanceof Psr\Http\Message\RequestInterface
         ) {
             $requestString = RequestSerializer::toString($request);
@@ -107,15 +105,13 @@ if (!function_exists('response_to_string')) {
     {
         $responseString = "unknown\r\n";
 
-        if (
-            class_exists('Symfony\Component\HttpFoundation\Response') &&
+        if (class_exists('Symfony\Component\HttpFoundation\Response') &&
             $response instanceof Symfony\Component\HttpFoundation\Response
         ) {
             $responseString = $response->__toString();
         }
 
-        if (
-            interface_exists('Psr\Http\Message\ResponseInterface') &&
+        if (interface_exists('Psr\Http\Message\ResponseInterface') &&
             $response instanceof Psr\Http\Message\ResponseInterface
         ) {
             $responseString = ResponseSerializer::toString($response);

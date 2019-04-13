@@ -21,8 +21,8 @@ class ResponseToStringTest extends TestCase
 
         $responseString = response_to_string($response);
 
-        TestCase::assertContains('HTTP', $responseString);
-        TestCase::assertContains('some response', $responseString);
+        TestCase::assertStringContainsString('HTTP', $responseString);
+        TestCase::assertStringContainsString('some response', $responseString);
     }
 
     /**
@@ -38,7 +38,7 @@ class ResponseToStringTest extends TestCase
 
         $responseString = response_to_string($response);
 
-        TestCase::assertContains('HTTP', $responseString);
-        TestCase::assertContains('some response', $responseString);
+        TestCase::assertStringContainsString('HTTP', $responseString);
+        TestCase::assertStringContainsString('some response', $responseString);
     }
 }

@@ -10,17 +10,17 @@ if (!function_exists('request_to_string')) {
      * @param Psr\Http\Message\RequestInterface|Symfony\Component\HttpFoundation\Request $request
      * @return string
      */
-    function request_to_string($request)
+    function request_to_string($request): string
     {
         $requestString = "unknown\r\n";
 
-        if (class_exists('Symfony\Component\HttpFoundation\Request') &&
+        if (class_exists(Symfony\Component\HttpFoundation\Request::class) &&
             $request instanceof Symfony\Component\HttpFoundation\Request
         ) {
             $requestString = $request->__toString();
         }
 
-        if (interface_exists('Psr\Http\Message\RequestInterface') &&
+        if (interface_exists(Psr\Http\Message\RequestInterface::class) &&
             $request instanceof Psr\Http\Message\RequestInterface
         ) {
             $requestString = RequestSerializer::toString($request);
@@ -37,7 +37,7 @@ if (!function_exists('request_to_curl')) {
      * @param Psr\Http\Message\RequestInterface|Symfony\Component\HttpFoundation\Request $request
      * @return string
      */
-    function request_to_curl($request)
+    function request_to_curl($request): string
     {
         $curl = sprintf('curl -X %s %s', $request->getMethod(), $request->getUri());
 
@@ -65,16 +65,16 @@ if (!function_exists('request_to_file')) {
      * @param string|null $path
      * @return string
      */
-    function request_to_file($request, $path = null)
+    function request_to_file($request, string $path = null): string
     {
         $httpRequest = request_to_string($request);
 
         if (empty($path)) {
-            $path = $_SERVER['DOCUMENT_ROOT'];
+            $path = (string) $_SERVER['DOCUMENT_ROOT'];
         }
 
         if (empty($path)) {
-            $path = getenv('PWD');
+            $path = (string) getenv('PWD');
         }
 
         $filename = $path . '/request.http';
@@ -101,17 +101,17 @@ if (!function_exists('response_to_string')) {
      * @param Psr\Http\Message\ResponseInterface|Symfony\Component\HttpFoundation\Response $response
      * @return string
      */
-    function response_to_string($response)
+    function response_to_string($response): string
     {
         $responseString = "unknown\r\n";
 
-        if (class_exists('Symfony\Component\HttpFoundation\Response') &&
+        if (class_exists(Symfony\Component\HttpFoundation\Response::class) &&
             $response instanceof Symfony\Component\HttpFoundation\Response
         ) {
             $responseString = $response->__toString();
         }
 
-        if (interface_exists('Psr\Http\Message\ResponseInterface') &&
+        if (interface_exists(Psr\Http\Message\ResponseInterface::class) &&
             $response instanceof Psr\Http\Message\ResponseInterface
         ) {
             $responseString = ResponseSerializer::toString($response);
@@ -131,16 +131,16 @@ if (!function_exists('response_to_file')) {
      * @param string|null $path
      * @return string
      */
-    function response_to_file($response, $path = null)
+    function response_to_file($response, string $path = null): string
     {
         $httpResponse = response_to_string($response);
 
         if (empty($path)) {
-            $path = $_SERVER['DOCUMENT_ROOT'];
+            $path = (string) $_SERVER['DOCUMENT_ROOT'];
         }
 
         if (empty($path)) {
-            $path = getenv('PWD');
+            $path = (string) getenv('PWD');
         }
 
         $filename = $path . '/response.http';

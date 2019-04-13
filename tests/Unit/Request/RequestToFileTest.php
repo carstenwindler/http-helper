@@ -21,7 +21,7 @@ class RequestToFileTest extends TestCase
 
     public static $now;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -34,7 +34,7 @@ class RequestToFileTest extends TestCase
     /**
      * Reset custom time after test
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         self::$now = null;
     }
@@ -56,7 +56,7 @@ class RequestToFileTest extends TestCase
         TestCase::assertTrue(file_exists(vfsStream::url('root/webroot/request.http')));
         TestCase::assertEquals(vfsStream::url('root/webroot/request.http'), $filename);
 
-        TestCase::assertContains('Host: www.carstenwindler.de', file_get_contents($filename));
+        TestCase::assertStringContainsString('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
     /**
@@ -74,7 +74,7 @@ class RequestToFileTest extends TestCase
         TestCase::assertTrue(file_exists(vfsStream::url('root/request.http')));
         TestCase::assertEquals(vfsStream::url('root/request.http'), $filename);
 
-        TestCase::assertContains('Host: www.carstenwindler.de', file_get_contents($filename));
+        TestCase::assertStringContainsString('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
     /**

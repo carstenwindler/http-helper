@@ -21,7 +21,7 @@ class ResponseToFileTest extends TestCase
 
     public static $now;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -34,7 +34,7 @@ class ResponseToFileTest extends TestCase
     /**
      * Reset custom time after test
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         self::$now = null;
     }
@@ -53,7 +53,7 @@ class ResponseToFileTest extends TestCase
         TestCase::assertTrue(file_exists(vfsStream::url('root/webroot/response.http')));
         TestCase::assertEquals(vfsStream::url('root/webroot/response.http'), $filename);
 
-        TestCase::assertContains('some response', file_get_contents($filename));
+        TestCase::assertStringContainsString('some response', file_get_contents($filename));
     }
 
     /**
@@ -68,7 +68,7 @@ class ResponseToFileTest extends TestCase
         TestCase::assertTrue(file_exists(vfsStream::url('root/response.http')));
         TestCase::assertEquals(vfsStream::url('root/response.http'), $filename);
 
-        TestCase::assertContains('some response', file_get_contents($filename));
+        TestCase::assertStringContainsString('some response', file_get_contents($filename));
     }
 
     /**

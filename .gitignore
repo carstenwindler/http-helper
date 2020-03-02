@@ -1,5 +1,4 @@
 .idea
 composer.lock
-build
 vendor
 /.phpunit.result.cache

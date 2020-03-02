@@ -1,4 +1,10 @@
-# Http Helper [![Build Status](https://travis-ci.org/carstenwindler/http-helper.svg?branch=master)](https://travis-ci.org/carstenwindler/http-helper)
+# Http Helper 
+
+[![Build Status](https://travis-ci.org/carstenwindler/http-helper.svg?branch=master)](https://travis-ci.org/carstenwindler/http-helper)
+[![Latest Stable Version](https://poser.pugx.org/carstenwindler/http-helper/v/stable)](https://packagist.org/packages/carstenwindler/http-helper)
+[![Minimum PHP Version](https://img.shields.io/packagist/php-v/carstenwindler/http-helper.svg)](https://php.net/)
+[![License](https://poser.pugx.org/carstenwindler/http-helper/license)](https://packagist.org/packages/carstenwindler/http-helper)
+[![Total Downloads](https://poser.pugx.org/carstenwindler/http-helper/downloads)](https://packagist.org/packages/carstenwindler/http-helper)
 
 A collection of helper functions for your everyday work with http requests and responses.
 
@@ -68,7 +74,7 @@ But why would you do that? Here, PhpStorm comes into play. It now comes equipped
 
 # Credits
 
-The serialization of the PSR-7 requests and responses are done using [Zend Diactoros](https://github.com/zendframework/zend-diactoros). Weird name, great library!
+The serialization of the PSR-7 requests and responses are done using [Laminas Diactoros](https://github.com/laminas/laminas-diactoros). Weird name, great library!
 
 For Symfony, the build-in serializers are used. Nice.
 

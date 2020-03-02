@@ -1,7 +1,7 @@
 <?php
 
-use Zend\Diactoros\Request\Serializer as RequestSerializer;
-use Zend\Diactoros\Response\Serializer as ResponseSerializer;
+use Laminas\Diactoros\Request\Serializer as RequestSerializer;
+use Laminas\Diactoros\Response\Serializer as ResponseSerializer;
 
 if (!function_exists('request_to_string')) {
     /**
@@ -14,14 +14,14 @@ if (!function_exists('request_to_string')) {
     {
         $requestString = "unknown\r\n";
 
-        if (class_exists(Symfony\Component\HttpFoundation\Request::class) &&
-            $request instanceof Symfony\Component\HttpFoundation\Request
+        if ($request instanceof Symfony\Component\HttpFoundation\Request &&
+            class_exists(Symfony\Component\HttpFoundation\Request::class)
         ) {
             $requestString = $request->__toString();
         }
 
-        if (interface_exists(Psr\Http\Message\RequestInterface::class) &&
-            $request instanceof Psr\Http\Message\RequestInterface
+        if ($request instanceof Psr\Http\Message\RequestInterface &&
+            interface_exists(Psr\Http\Message\RequestInterface::class)
         ) {
             $requestString = RequestSerializer::toString($request);
         }
@@ -32,7 +32,7 @@ if (!function_exists('request_to_string')) {
 
 if (!function_exists('request_to_curl')) {
     /**
-     * Serializes  a Request (PSR7 or Symfony Http Foundation) into curl syntax
+     * Serializes a Request (PSR7 or Symfony Http Foundation) into curl syntax
      *
      * @param Psr\Http\Message\RequestInterface|Symfony\Component\HttpFoundation\Request $request
      * @return string
@@ -42,7 +42,7 @@ if (!function_exists('request_to_curl')) {
         $curl = sprintf('curl -X %s %s', $request->getMethod(), $request->getUri());
 
         foreach ($request->getHeaders() as $name => $values) {
-            $curl .= sprintf(" -H '%s'", $name . ": " . implode(", ", $values));
+            $curl .= sprintf(" -H '%s'", $name . ': ' . implode(', ', $values));
         }
 
         $body = (string)$request->getBody();
@@ -105,14 +105,14 @@ if (!function_exists('response_to_string')) {
     {
         $responseString = "unknown\r\n";
 
-        if (class_exists(Symfony\Component\HttpFoundation\Response::class) &&
-            $response instanceof Symfony\Component\HttpFoundation\Response
+        if ($response instanceof Symfony\Component\HttpFoundation\Response &&
+            class_exists(Symfony\Component\HttpFoundation\Response::class)
         ) {
             $responseString = $response->__toString();
         }
 
-        if (interface_exists(Psr\Http\Message\ResponseInterface::class) &&
-            $response instanceof Psr\Http\Message\ResponseInterface
+        if ($response instanceof Psr\Http\Message\ResponseInterface &&
+            interface_exists(Psr\Http\Message\ResponseInterface::class)
         ) {
             $responseString = ResponseSerializer::toString($response);
         }

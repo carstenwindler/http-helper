@@ -2,8 +2,8 @@
 
 namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
-use Zend\Diactoros\Request;
-use Zend\Diactoros\Stream;
+use Laminas\Diactoros\Request;
+use Laminas\Diactoros\Stream;
 use PHPUnit\Framework\TestCase;
 
 class RequestToCurlTest extends TestCase

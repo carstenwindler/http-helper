@@ -2,7 +2,7 @@
 
 namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
-use Zend\Diactoros\Request;
+use Laminas\Diactoros\Request;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;

@@ -5,6 +5,7 @@
 [![Minimum PHP Version](https://img.shields.io/packagist/php-v/carstenwindler/http-helper.svg)](https://php.net/)
 [![License](https://poser.pugx.org/carstenwindler/http-helper/license)](https://packagist.org/packages/carstenwindler/http-helper)
 [![Total Downloads](https://poser.pugx.org/carstenwindler/http-helper/downloads)](https://packagist.org/packages/carstenwindler/http-helper)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/carstenwindler/http-helper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/carstenwindler/http-helper/?branch=master)
 
 A collection of helper functions for your everyday work with http requests and responses.
 

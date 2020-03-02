@@ -2,7 +2,7 @@
 
 namespace Carstenwindler\HttpHelper\Tests\Unit\Request;
 
-use Zend\Diactoros\Request as Psr7Request;
+use Laminas\Diactoros\Request as Psr7Request;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use PHPUnit\Framework\TestCase;
 

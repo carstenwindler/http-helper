@@ -84,7 +84,7 @@ if (!function_exists('request_to_file')) {
         // Append request to file if it already exists, using ### as separator
         // which is understood by PhpStorm
         if (file_exists($filename)) {
-            $httpRequest =  "\n\n### " . date(DATE_RFC822) . "\n\n" . $httpRequest;
+            $httpRequest = "\n\n### " . date(DATE_RFC822) . "\n\n" . $httpRequest;
             $flags = FILE_APPEND;
         }
 
@@ -127,7 +127,7 @@ if (!function_exists('response_to_file')) {
      * If the file already exists, the string will be appended, using PhpStorm .http formats ###
      * as separator
      *
-     * @param Psr\Http\Message\RequestInterface|Symfony\Component\HttpFoundation\Request $request
+     * @param Psr\Http\Message\ResponseInterface|Symfony\Component\HttpFoundation\Response $response
      * @param string|null $path
      * @return string
      */
@@ -150,7 +150,7 @@ if (!function_exists('response_to_file')) {
         // Append request to file if it already exists, using ### as separator
         // which is understood by PhpStorm
         if (file_exists($filename)) {
-            $httpResponse =  "\n\n### " . date(DATE_RFC822) . "\n\n" . $httpResponse;
+            $httpResponse = "\n\n### " . date(DATE_RFC822) . "\n\n" . $httpResponse;
             $flags = FILE_APPEND;
         }
 

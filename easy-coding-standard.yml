@@ -1,5 +1,0 @@
-# easy-coding-standard.yml
-parameters:
-  sets:
-    - 'clean-code'
-    - 'psr12'

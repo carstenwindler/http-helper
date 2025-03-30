@@ -17,7 +17,7 @@ if (!function_exists('request_to_string')) {
         if ($request instanceof Symfony\Component\HttpFoundation\Request &&
             class_exists(Symfony\Component\HttpFoundation\Request::class)
         ) {
-            $requestString = $request->__toString();
+            $requestString = (string)$request;
         }
 
         if ($request instanceof Psr\Http\Message\RequestInterface &&
@@ -39,7 +39,7 @@ if (!function_exists('request_to_curl')) {
      */
     function request_to_curl($request): string
     {
-        $curl = sprintf('curl -X %s %s', $request->getMethod(), $request->getUri());
+        $curl = sprintf('curl -i -X %s %s', $request->getMethod(), $request->getUri());
 
         foreach ($request->getHeaders() as $name => $values) {
             $curl .= sprintf(" -H '%s'", $name . ': ' . implode(', ', $values));
@@ -65,7 +65,7 @@ if (!function_exists('request_to_file')) {
      * @param string|null $path
      * @return string
      */
-    function request_to_file($request, string $path = null): string
+    function request_to_file($request, ?string $path = null): string
     {
         $httpRequest = request_to_string($request);
 
@@ -131,7 +131,7 @@ if (!function_exists('response_to_file')) {
      * @param string|null $path
      * @return string
      */
-    function response_to_file($response, string $path = null): string
+    function response_to_file($response, ?string $path = null): string
     {
         $httpResponse = response_to_string($response);
 

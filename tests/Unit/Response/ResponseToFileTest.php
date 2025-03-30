@@ -2,8 +2,7 @@
 
 namespace Carstenwindler\HttpHelper\Tests\Unit\Response;
 
-use Zend\Diactoros\Response\TextResponse as Psr7Response;
-
+use Laminas\Diactoros\Response\TextResponse;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -14,17 +13,12 @@ function time() {
 
 class ResponseToFileTest extends TestCase
 {
-    /**
-     * @var vfsStreamDirectory
-     */
-    private $vfsRoot;
+    private vfsStreamDirectory $vfsRoot;
 
     public static $now;
 
     public function setUp(): void
     {
-        parent::setUp();
-
         self::$now = time();
 
         $this->vfsRoot = vfsStream::setup('root');
@@ -39,44 +33,35 @@ class ResponseToFileTest extends TestCase
         self::$now = null;
     }
 
-    /**
-     * @test
-     */
-    public function to_file_with_default_name()
+    public function test_to_file_with_default_name()
     {
-        $response = new Psr7Response('some response');
+        $response = new TextResponse('some response');
 
         $_SERVER['DOCUMENT_ROOT'] = vfsStream::url('root/webroot');
 
         $filename = response_to_file($response);
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/webroot/response.http')));
+        TestCase::assertFileExists(vfsStream::url('root/webroot/response.http'));
         TestCase::assertEquals(vfsStream::url('root/webroot/response.http'), $filename);
 
         TestCase::assertStringContainsString('some response', file_get_contents($filename));
     }
 
-    /**
-     * @test
-     */
-    public function to_file_with_given_path()
+    public function test_to_file_with_given_path()
     {
-        $response = new Psr7Response('some response');
+        $response = new TextResponse('some response');
 
         $filename = response_to_file($response, vfsStream::url('root'));
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/response.http')));
+        TestCase::assertFileExists(vfsStream::url('root/response.http'));
         TestCase::assertEquals(vfsStream::url('root/response.http'), $filename);
 
         TestCase::assertStringContainsString('some response', file_get_contents($filename));
     }
 
-    /**
-     * @test
-     */
-    public function to_file_will_append_if_file_exists()
+    public function test_to_file_will_append_if_file_exists()
     {
-        $response = new Psr7Response('some response');
+        $response = new TextResponse('some response');
 
         $filename = response_to_file($response, vfsStream::url('root'));
 
@@ -87,7 +72,7 @@ class ResponseToFileTest extends TestCase
         $expectedFile = $httpRequest;
         $expectedFile .= "\n\n### " . date(DATE_RFC822, time()) . "\n\n" . $httpRequest;
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/response.http')));
+        TestCase::assertFileExists(vfsStream::url('root/response.http'));
         TestCase::assertEquals(vfsStream::url('root/response.http'), $filename);
 
         TestCase::assertEquals($expectedFile, file_get_contents($filename));

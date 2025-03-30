@@ -8,13 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 class RequestToStringTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function psr7_to_string()
+    public function test_psr7_to_string()
     {
         $request = new Psr7Request(
-            'http://www.carstenwindler.de',
+            'https://www.carstenwindler.de',
             'POST'
         );
 
@@ -26,13 +23,10 @@ class RequestToStringTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function symfony_request_to_string()
+    public function test_symfony_request_to_string()
     {
         $request = SymfonyRequest::create(
-            'http://www.carstenwindler.de',
+            'https://www.carstenwindler.de',
             'POST',
             [],
             [],
@@ -58,10 +52,7 @@ class RequestToStringTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function returns_unknown_if_request_is_not_supported()
+    public function test_returns_unknown_if_request_is_not_supported()
     {
         // just some random nonsense
         $request = new \stdClass;

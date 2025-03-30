@@ -14,17 +14,12 @@ function time() {
 
 class RequestToFileTest extends TestCase
 {
-    /**
-     * @var vfsStreamDirectory
-     */
-    private $vfsRoot;
+    private vfsStreamDirectory $vfsRoot;
 
     public static $now;
 
     public function setUp(): void
     {
-        parent::setUp();
-
         self::$now = time();
 
         $this->vfsRoot = vfsStream::setup('root');
@@ -39,13 +34,10 @@ class RequestToFileTest extends TestCase
         self::$now = null;
     }
 
-    /**
-     * @test
-     */
-    public function to_file_with_default_name()
+    public function test_to_file_with_default_name()
     {
         $request = new Request(
-            'http://www.carstenwindler.de',
+            'https://www.carstenwindler.de',
             'POST'
         );
 
@@ -53,37 +45,31 @@ class RequestToFileTest extends TestCase
 
         $filename = request_to_file($request);
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/webroot/request.http')));
+        TestCase::assertFileExists(vfsStream::url('root/webroot/request.http'));
         TestCase::assertEquals(vfsStream::url('root/webroot/request.http'), $filename);
 
         TestCase::assertStringContainsString('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
-    /**
-     * @test
-     */
-    public function to_file_with_given_path()
+    public function test_to_file_with_given_path()
     {
         $request = new Request(
-            'http://www.carstenwindler.de',
+            'https://www.carstenwindler.de',
             'POST'
         );
 
         $filename = request_to_file($request, vfsStream::url('root'));
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/request.http')));
+        TestCase::assertFileExists(vfsStream::url('root/request.http'));
         TestCase::assertEquals(vfsStream::url('root/request.http'), $filename);
 
         TestCase::assertStringContainsString('Host: www.carstenwindler.de', file_get_contents($filename));
     }
 
-    /**
-     * @test
-     */
-    public function to_file_will_append_if_file_exists()
+    public function test_to_file_will_append_if_file_exists()
     {
         $request = new Request(
-            'http://www.carstenwindler.de',
+            'https://www.carstenwindler.de',
             'POST'
         );
 
@@ -96,7 +82,7 @@ class RequestToFileTest extends TestCase
 
         $expectedFile .= "\n\n### " . date(DATE_RFC822, time()) . "\n\n" . $httpRequest;
 
-        TestCase::assertTrue(file_exists(vfsStream::url('root/request.http')));
+        TestCase::assertFileExists(vfsStream::url('root/request.http'));
         TestCase::assertEquals(vfsStream::url('root/request.http'), $filename);
 
         TestCase::assertEquals($expectedFile, file_get_contents($filename));

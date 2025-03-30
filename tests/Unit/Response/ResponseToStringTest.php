@@ -2,18 +2,15 @@
 
 namespace Carstenwindler\HttpHelper\Tests\Unit\Response;
 
-use Zend\Diactoros\Response\TextResponse as Psr7Response;
+use Laminas\Diactoros\Response\TextResponse;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use PHPUnit\Framework\TestCase;
 
 class ResponseToStringTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function psr7_to_string()
+    public function test_psr7_to_string()
     {
-        $response = new Psr7Response(
+        $response = new TextResponse(
             'some response',
             400,
             [ 'X-TEST-HEADER' => 'somevalue' ]
@@ -25,10 +22,7 @@ class ResponseToStringTest extends TestCase
         TestCase::assertStringContainsString('some response', $responseString);
     }
 
-    /**
-     * @test
-     */
-    public function symfony_request_to_string()
+    public function test_symfony_request_to_string()
     {
         $response = new SymfonyResponse(
             'some response',

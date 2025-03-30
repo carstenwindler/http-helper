@@ -1,6 +1,5 @@
 # Http Helper 
 
-[![Build Status](https://travis-ci.org/carstenwindler/http-helper.svg?branch=master)](https://travis-ci.org/carstenwindler/http-helper)
 [![Latest Stable Version](https://poser.pugx.org/carstenwindler/http-helper/v/stable)](https://packagist.org/packages/carstenwindler/http-helper)
 [![Minimum PHP Version](https://img.shields.io/packagist/php-v/carstenwindler/http-helper.svg)](https://php.net/)
 [![License](https://poser.pugx.org/carstenwindler/http-helper/license)](https://packagist.org/packages/carstenwindler/http-helper)
@@ -23,7 +22,7 @@ Here are some http-helper functions in action:
 
 # Installation
 
-`composer require-dev carstenwindler/http-helper`
+`composer require --dev carstenwindler/http-helper`
 
 (I suggest to only add these functions as `require-dev`).
 
